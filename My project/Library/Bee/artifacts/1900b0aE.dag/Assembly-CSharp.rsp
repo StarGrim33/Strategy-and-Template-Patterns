@@ -355,6 +355,7 @@
 "Assets/Source/Bullet.cs"
 "Assets/Source/Bullets/SimpleBullet.cs"
 "Assets/Source/IWeapon.cs"
+"Assets/Source/NPCs/NPC.cs"
 "Assets/Source/Player/PlayerBootsTrap.cs"
 "Assets/Source/Player/PlayerShooting.cs"
 "Assets/Source/Weapon/InfiniteAmmoGun.cs"
