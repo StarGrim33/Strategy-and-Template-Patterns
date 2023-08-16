@@ -3,13 +3,20 @@ using UnityEngine;
 
 public class PlayerShooting : MonoBehaviour
 {
+    [SerializeField] private List<Weapon> _weaponPrefabs;
     private List<IWeapon> _weapons;
     private IWeapon _currentWeapon;
 
     public void Init()
     {
-        _weapons = new List<IWeapon> { gameObject.AddComponent<Pistol>(), gameObject.AddComponent<Shotgun>(), gameObject.AddComponent<InfiniteAmmoGun>() };
-        _currentWeapon = _weapons[0];
+        _weapons = new List<IWeapon>();
+
+        foreach (var weaponPrefab in _weaponPrefabs)
+        {
+            var weaponInstance = Instantiate(weaponPrefab, transform);
+            _weapons.Add(weaponInstance);
+        }
+
         PerformShot();
     }
 

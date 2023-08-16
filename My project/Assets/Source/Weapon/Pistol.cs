@@ -26,10 +26,10 @@ public class Pistol : Weapon
 
     protected override IEnumerator Reloading()
     {
-        Debug.Log("Reloading...");
+        Debug.Log("Pistol Reloading...");
         var waitForSeconds = new WaitForSeconds(_reloadingDelay);
         yield return waitForSeconds;
         _currentAmmo = _magazine;
-        Debug.Log("Reloaded");
+        Debug.Log("Pistol Reloaded");
     }
 }

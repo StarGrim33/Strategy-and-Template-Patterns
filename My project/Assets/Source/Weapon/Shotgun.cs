@@ -36,10 +36,10 @@ public class Shotgun : Weapon
 
     protected override IEnumerator Reloading()
     {
-        Debug.Log("Reloading...");
+        Debug.Log("Shotgun Reloading...");
         var waitForSeconds = new WaitForSeconds(_reloadingDelay);
         yield return waitForSeconds;
         _currentAmmo = _magazine;
-        Debug.Log("Reloaded");
+        Debug.Log("Shotgun Reloaded");
     }
 }
