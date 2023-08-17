@@ -1,8 +1,11 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public abstract class Ball : MonoBehaviour
 {
-    [SerializeField] private Game _game;
+    //[SerializeField] private Game _game;
+
+    public event UnityAction<Ball> BallPopped;
 
     public Color Color { get; protected set; }
 
@@ -13,6 +16,9 @@ public abstract class Ball : MonoBehaviour
         _clicksToPop--;
 
         if (_clicksToPop == 0)
-            _game.BallsPoped(this);
+        {
+            //_game.BallsPoped(this);
+            BallPopped?.Invoke(this);
+        }
     }
 }
