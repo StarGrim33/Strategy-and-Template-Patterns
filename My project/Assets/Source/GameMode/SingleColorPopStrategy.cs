@@ -1,10 +1,11 @@
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class SingleColorPopStrategy : IVictory
 {
     private Color _targetColor;
+
+    public Color Color => _targetColor;
 
     public SingleColorPopStrategy(Color color)
     {

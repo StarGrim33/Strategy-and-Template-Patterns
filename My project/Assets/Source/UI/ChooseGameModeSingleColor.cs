@@ -1,23 +1,29 @@
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class ChooseGameModeSingleColor : MonoBehaviour
 {
-    [SerializeField] private Game _game;
+    private SceneLoadMediator _mediatorMediator;
 
-    private readonly Dictionary<Color, string> colorNames = new Dictionary<Color, string>
+    [Inject]
+    private void Construct(SceneLoadMediator mediator)
+    {
+        _mediatorMediator = mediator;
+    }
+
+    private readonly Dictionary<Color, string> colorNames = new()
     {
         { Color.red, "Red" },
         { Color.green, "Green" },
         { Color.white, "White" }
     };
 
-    public void ChooseMode(GameObject gameObject)
+    public void ChooseMode()
     {
         Color color = ChooseColorRandomly();
-        _game.Init(new SingleColorPopStrategy(color));
+        _mediatorMediator.GoToGameplayLevel(new SingleColorPopStrategy(color));
         Debug.Log($"Requer target is {colorNames[color]}");
-        gameObject.SetActive(false);
     }
 
     private Color ChooseColorRandomly()

@@ -1,15 +1,25 @@
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class Game : MonoBehaviour
 {
-    [SerializeField] private List<Ball> _balls;
-    [SerializeField] private List<Ball> _poppedBalls;
+    private List<Ball> _balls;
+    private List<Ball> _poppedBalls;
+    private IVictory _iVictoryStrategy;
 
     private void OnEnable()
     {
         foreach (var ball in _balls)
             ball.BallPopped += OnBallPopped;
+    }
+
+    [Inject]
+    private void Construct(List<Ball> balls, IVictory victory)
+    {
+        _balls = balls;
+        _poppedBalls = new List<Ball>();
+        _iVictoryStrategy = victory;
     }
 
     private void OnBallPopped(Ball ball)
@@ -18,13 +28,6 @@ public class Game : MonoBehaviour
         ball.BallPopped -= OnBallPopped;
         ball.gameObject.SetActive(false);
         BallsPoped();
-    }
-
-    private IVictory _iVictoryStrategy;
-
-    public void Init(IVictory victoryStrategy)
-    {
-        _iVictoryStrategy = victoryStrategy;
     }
 
     public void BallsPoped()

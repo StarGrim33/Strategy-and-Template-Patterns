@@ -1,12 +1,18 @@
 using UnityEngine;
+using Zenject;
 
 public class ChooseGameModePopAllBall : MonoBehaviour
 {
-    [SerializeField] private Game _game;
+    private SceneLoadMediator _mediatorMediator;
 
-    public void ChooseMode(GameObject gameObject)
+    [Inject]
+    private void Construct(SceneLoadMediator sceneLoadMediator)
     {
-        _game.Init(new AllBallsPopStrategy());
-        gameObject.SetActive(false);
+        _mediatorMediator = sceneLoadMediator;
+    }
+
+    public void ChooseMode()
+    {
+        _mediatorMediator.GoToGameplayLevel(new AllBallsPopStrategy());
     }
 }
